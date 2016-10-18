@@ -3,9 +3,9 @@ package com.kcode.autoviewpager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.kcode.autoviewpager.view.AutoScrollViewPager;
-import com.kcode.autoviewpager.view.AutoViewPager;
-import com.kcode.autoviewpager.view.ViewPagerAdapter;
+import com.kcode.autoscrollviewpager.view.AutoScrollViewPager;
+import com.kcode.autoscrollviewpager.view.AutoViewPager;
+import com.kcode.autoscrollviewpager.view.ViewPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
 

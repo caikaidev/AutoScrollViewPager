@@ -7,9 +7,9 @@
     android:layout_height="match_parent"
     tools:context="com.kcode.autoviewpager.MainActivity">
 
-    <com.kcode.autoviewpager.view.AutoScrollViewPager
+    <com.kcode.autoscrollviewpager.view.AutoScrollViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="220dp"></com.kcode.autoviewpager.view.AutoScrollViewPager>
+        android:layout_height="220dp"></com.kcode.autoscrollviewpager.view.AutoScrollViewPager>
 
 </RelativeLayout>

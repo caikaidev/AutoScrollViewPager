@@ -1,4 +1,4 @@
-package com.kcode.autoviewpager.view;
+package com.kcode.autoscrollviewpager.view;
 
 import android.content.Context;
 import android.os.Message;

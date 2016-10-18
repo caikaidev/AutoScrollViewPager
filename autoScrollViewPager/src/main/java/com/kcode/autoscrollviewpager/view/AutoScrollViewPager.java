@@ -1,4 +1,4 @@
-package com.kcode.autoviewpager.view;
+package com.kcode.autoscrollviewpager.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.kcode.autoviewpager.R;
+import com.kcode.autoscrollviewpager.R;
 
 import static android.view.Gravity.CENTER;
 
