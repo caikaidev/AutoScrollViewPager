@@ -59,8 +59,12 @@ public class AutoViewPager extends ViewPager {
     private AutoHandler mHandler = new AutoHandler();
 
     public void updatePointView(int size) {
-        AutoScrollViewPager pager = (AutoScrollViewPager) getParent();
-        pager.initPointView(size);
+        if (getParent() instanceof AutoScrollViewPager){
+            AutoScrollViewPager pager = (AutoScrollViewPager) getParent();
+            pager.initPointView(size);
+        }else {
+            Log.e(TAG,"parent view not be AutoScrollViewPager");
+        }
     }
 
     public void onPageSelected(int position) {
@@ -90,6 +94,10 @@ public class AutoViewPager extends ViewPager {
             mTimer.cancel();
             mTimer = null;
         }
+    }
+
+    public void onDestroy(){
+        onStop();
     }
 
     public void onResume(){

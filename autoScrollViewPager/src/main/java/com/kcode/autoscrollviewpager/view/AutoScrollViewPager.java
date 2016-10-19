@@ -25,13 +25,15 @@ public class AutoScrollViewPager extends RelativeLayout{
 
     public AutoScrollViewPager(Context context) {
         super(context);
-        mContext = context;
-        mViewPager = new AutoViewPager(context);
-        addView(mViewPager);
+        init(context);
     }
 
     public AutoScrollViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init(context);
+    }
+
+    private void init(Context context){
         mContext = context;
         mViewPager = new AutoViewPager(context);
         layout = new LinearLayout(mContext);
@@ -48,7 +50,7 @@ public class AutoScrollViewPager extends RelativeLayout{
         for (int i = 0; i < size; i++) {
             ImageView imageView = new ImageView(mContext);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(20,20);
-            params.leftMargin = 20;
+            params.leftMargin = 8;
             params.gravity = CENTER;
             imageView.setLayoutParams(params);
             if (i == 0) {
@@ -63,7 +65,7 @@ public class AutoScrollViewPager extends RelativeLayout{
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.addRule(ALIGN_PARENT_BOTTOM);
         layoutParams.addRule(ALIGN_PARENT_RIGHT);
-        layoutParams.setMargins(10,20,10,20);
+        layoutParams.setMargins(12,20,12,20);
         layout.setLayoutParams(layoutParams);
         addView(layout);
     }
