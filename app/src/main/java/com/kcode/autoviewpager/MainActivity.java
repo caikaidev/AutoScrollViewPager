@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
 
     private AutoViewPager mViewPager;
     private PictureViewPagerAdapter mAdapter;
-
     private AutoScrollViewPager autoScrollViewPager;
 
     private String[] paths = {"https://ss3.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/image/h%3D200/sign=c493b482b47eca800d053ee7a1229712/8cb1cb1349540923abd671df9658d109b2de49d7.jpg",

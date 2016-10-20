@@ -1,4 +1,8 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+// This is the library version used when deploying the artifact
+version = "0.1.0"
 
 android {
     compileSdkVersion 24
@@ -10,8 +14,6 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
     buildTypes {
         release {
@@ -22,9 +24,85 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
     compile 'com.android.support:appcompat-v7:24.2.0'
+}
+
+def siteUrl = 'https://github.com/fccaikai/AutoScrollViewPager'      // Homepage URL of the library
+def gitUrl = 'https://github.com/fccaikai/AutoScrollViewPager.git'   // Git repository URL
+group = "com.kcode.github"                                          // Maven Group ID for the artifact
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+
+                // Add your description here
+                name 'com.kcode.github:AutoScrollViewPager' // TODO
+                description = 'android auto scroll viewpager' // TODO
+                url siteUrl
+
+                // Set your license
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'caikai' // TODO
+                        name 'caikai' // TODO
+                        email 'ck19920702@gmail.com' // TODO
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+// https://github.com/bintray/gradle-bintray-plugin
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    configurations = ['archives']
+    pkg {
+        repo = "maven"
+        // it is the name that appears in bintray when logged
+        name = "AutoViewPager" // TODO
+        websiteUrl = siteUrl
+        userOrg = "kcode"
+        vcsUrl = gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
+    }
 }

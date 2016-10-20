@@ -26,6 +26,6 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:24.2.0'
     testCompile 'junit:junit:4.12'
-    compile project(':autoScrollViewPager')
     compile 'com.squareup.picasso:picasso:2.3.2'
+    compile 'com.kcode.github:autoScrollViewPager:0.1.0'
 }
