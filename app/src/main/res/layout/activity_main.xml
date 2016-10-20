@@ -13,5 +13,4 @@
         android:layout_height="220dp">
 
     </com.kcode.autoscrollviewpager.view.AutoScrollViewPager>
-
 </RelativeLayout>

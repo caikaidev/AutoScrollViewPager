@@ -23,8 +23,6 @@ public class AutoViewPager extends ViewPager {
     private Timer mTimer;
     private AutoTask mTask;
 
-    private boolean isFirst = true;
-
     public AutoViewPager(Context context) {
         super(context);
     }
@@ -45,7 +43,6 @@ public class AutoViewPager extends ViewPager {
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            Log.i(TAG,"move");
             currentItem = getCurrentItem();
             if(currentItem == getAdapter().getCount() - 1){
                 currentItem = 0 ;

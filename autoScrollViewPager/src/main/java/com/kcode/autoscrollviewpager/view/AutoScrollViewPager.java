@@ -43,7 +43,6 @@ public class AutoScrollViewPager extends RelativeLayout{
     public AutoViewPager getViewPager() {
         return mViewPager;
     }
-
     public void initPointView(int size){
 
         layout = new LinearLayout(mContext);
@@ -69,6 +68,7 @@ public class AutoScrollViewPager extends RelativeLayout{
         layout.setLayoutParams(layoutParams);
         addView(layout);
     }
+
 
     public void updatePointView(int position) {
         int size = layout.getChildCount();

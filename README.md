@@ -6,8 +6,7 @@
 Gradle:
 
 ```
-	compile 'com.kcode.github:autoScrollViewPager:0.1.0'
-
+compile 'com.kcode.github:autoScrollViewPager:0.1.0'
 ```
 
 ##Usage

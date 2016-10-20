@@ -61,6 +61,10 @@ public abstract class BaseViewPagerAdapter<T> extends PagerAdapter implements Vi
         mView.updatePointView(getRealCount());
     }
 
+    public void setListener(OnAutoViewPagerItemClickListener listener) {
+        this.listener = listener;
+    }
+
     public void add(T t){
         data.add(t);
         notifyDataSetChanged();
