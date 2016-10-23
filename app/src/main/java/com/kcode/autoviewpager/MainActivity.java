@@ -6,7 +6,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.kcode.autoscrollviewpager.view.AutoScrollViewPager;
-import com.kcode.autoscrollviewpager.view.AutoViewPager;
 import com.kcode.autoscrollviewpager.view.BaseViewPagerAdapter;
 import com.kcode.autoviewpager.bean.Picture;
 import com.squareup.picasso.Picasso;
@@ -16,8 +15,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AutoViewPager mViewPager;
-    private AutoScrollViewPager autoScrollViewPager;
+    private AutoScrollViewPager mViewPager;
 
     private String[] paths = {"https://ss3.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/image/h%3D200/sign=c493b482b47eca800d053ee7a1229712/8cb1cb1349540923abd671df9658d109b2de49d7.jpg",
             "https://ss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/image/h%3D200/sign=45fbfa5555da81cb51e684cd6267d0a4/2f738bd4b31c8701491ea047237f9e2f0608ffe3.jpg",
@@ -30,22 +28,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        autoScrollViewPager = (AutoScrollViewPager) findViewById(R.id.viewPager);
-        mViewPager = autoScrollViewPager.getViewPager();
-        autoScrollViewPager.setAdapter(new BaseViewPagerAdapter<Picture>(this,initData(),listener) {
+        mViewPager = (AutoScrollViewPager) findViewById(R.id.viewPager);
+        mViewPager.setAdapter(new BaseViewPagerAdapter<String>(this,initData(),listener) {
             @Override
-            public void loadImage(ImageView view, int position, Picture picture) {
-                Picasso.with(MainActivity.this).load(picture.getPath()).into(view);
+            public void loadImage(ImageView view, int position, String url) {
+                Picasso.with(MainActivity.this).load(url).into(view);
             }
         });
+
+
     }
 
-    private List<Picture> initData() {
-        List<Picture> data = new ArrayList<>();
+    private List<String> initData() {
+        List<String> data = new ArrayList<>();
         Picture picture ;
         for (int i = 0 ; i < paths.length ;i++){
-            picture = new Picture(paths[i],"图片" + i);
-            data.add(picture);
+            data.add(paths[i]);
         }
         return data;
     }

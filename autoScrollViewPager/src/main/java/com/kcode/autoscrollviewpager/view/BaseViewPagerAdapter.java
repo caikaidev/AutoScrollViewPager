@@ -40,6 +40,11 @@ public abstract class BaseViewPagerAdapter<T> extends PagerAdapter implements Vi
         this.listener = listener;
     }
 
+    public BaseViewPagerAdapter(Context context, List<T> data) {
+        this.mContext = context;
+        this.data = data;
+    }
+
     public BaseViewPagerAdapter(Context context, List<T> data,OnAutoViewPagerItemClickListener listener) {
         this.mContext = context;
         this.data = data;
