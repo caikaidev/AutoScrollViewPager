@@ -40,6 +40,12 @@ public class AutoScrollViewPager extends RelativeLayout{
         addView(mViewPager);
     }
 
+    public void setAdapter(BaseViewPagerAdapter adapter){
+        if (mViewPager != null) {
+            mViewPager.init(mViewPager,adapter);
+        }
+    }
+
     public AutoViewPager getViewPager() {
         return mViewPager;
     }

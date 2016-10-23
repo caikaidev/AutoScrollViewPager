@@ -31,6 +31,9 @@ public class AutoViewPager extends ViewPager {
         super(context, attrs);
     }
 
+    public void init(AutoViewPager viewPager,BaseViewPagerAdapter adapter){
+        adapter.init(viewPager,adapter);
+    }
 
     public void start(){
         if (mTimer == null) {

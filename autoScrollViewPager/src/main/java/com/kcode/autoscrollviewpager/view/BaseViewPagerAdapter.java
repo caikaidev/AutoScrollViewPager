@@ -30,31 +30,30 @@ public abstract class BaseViewPagerAdapter<T> extends PagerAdapter implements Vi
         this.data = t;
     }
 
-    public BaseViewPagerAdapter(Context context, AutoViewPager viewPager) {
+    public BaseViewPagerAdapter(Context context) {
         this.mContext = context;
-        mView = viewPager;
-        mView.setAdapter(this);
-        mView.addOnPageChangeListener(this);
-        mView.setCurrentItem(0);
     }
 
 
-    public BaseViewPagerAdapter(Context context, AutoViewPager viewPager,OnAutoViewPagerItemClickListener listener) {
+    public BaseViewPagerAdapter(Context context, OnAutoViewPagerItemClickListener listener) {
         this.mContext = context;
-        mView = viewPager;
         this.listener = listener;
-        mView.setAdapter(this);
-        mView.addOnPageChangeListener(this);
-        mView.setCurrentItem(0);
     }
 
-    public BaseViewPagerAdapter(Context context, List<T> data,AutoViewPager viewPager,OnAutoViewPagerItemClickListener listener) {
+    public BaseViewPagerAdapter(Context context, List<T> data,OnAutoViewPagerItemClickListener listener) {
         this.mContext = context;
-        mView = viewPager;
         this.data = data;
         this.listener = listener;
+    }
+
+    public void init(AutoViewPager viewPager,BaseViewPagerAdapter adapter){
+        mView = viewPager;
         mView.setAdapter(this);
         mView.addOnPageChangeListener(this);
+
+        if (data == null || data.size() == 0){
+            return;
+        }
         mView.setCurrentItem(0);
 
         mView.start();

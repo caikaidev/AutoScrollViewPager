@@ -2,6 +2,7 @@ package com.kcode.autoviewpager;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.kcode.autoscrollviewpager.view.AutoScrollViewPager;
@@ -33,6 +34,13 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = autoScrollViewPager.getViewPager();
         mAdapter = new PictureViewPagerAdapter(getApplicationContext(),initData(),mViewPager, listener);
 
+        new BaseViewPagerAdapter<Picture>(getApplicationContext(),initData(),mViewPager, listener){
+
+            @Override
+            public void loadImage(ImageView view, int position, Picture picture) {
+
+            }
+        };
     }
 
     private List<Picture> initData() {
