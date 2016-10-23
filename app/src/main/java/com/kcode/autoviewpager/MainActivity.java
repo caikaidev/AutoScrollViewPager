@@ -9,6 +9,7 @@ import com.kcode.autoscrollviewpager.view.AutoScrollViewPager;
 import com.kcode.autoscrollviewpager.view.AutoViewPager;
 import com.kcode.autoscrollviewpager.view.BaseViewPagerAdapter;
 import com.kcode.autoviewpager.bean.Picture;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private AutoViewPager mViewPager;
-    private PictureViewPagerAdapter mAdapter;
     private AutoScrollViewPager autoScrollViewPager;
 
     private String[] paths = {"https://ss3.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/image/h%3D200/sign=c493b482b47eca800d053ee7a1229712/8cb1cb1349540923abd671df9658d109b2de49d7.jpg",
@@ -32,15 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
         autoScrollViewPager = (AutoScrollViewPager) findViewById(R.id.viewPager);
         mViewPager = autoScrollViewPager.getViewPager();
-        mAdapter = new PictureViewPagerAdapter(getApplicationContext(),initData(),mViewPager, listener);
-
-        new BaseViewPagerAdapter<Picture>(getApplicationContext(),initData(),mViewPager, listener){
-
+        autoScrollViewPager.setAdapter(new BaseViewPagerAdapter<Picture>(this,initData(),listener) {
             @Override
             public void loadImage(ImageView view, int position, Picture picture) {
-
+                Picasso.with(MainActivity.this).load(picture.getPath()).into(view);
             }
-        };
+        });
     }
 
     private List<Picture> initData() {

@@ -5,6 +5,25 @@
 
 Gradle:
 
+in module's build.gradle,use:
+
+```
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+```
+
+replace:
+
+```
+    repositories {
+        jcenter()
+    }
+```
+
+in app's build.gradle,add:
+
 ```
 compile 'com.kcode.github:autoScrollViewPager:0.1.0'
 ```
@@ -13,7 +32,7 @@ compile 'com.kcode.github:autoScrollViewPager:0.1.0'
 * in layout
 
 ```
-	<com.kcode.autoscrollviewpager.view.AutoScrollViewPager
+    <com.kcode.autoscrollviewpager.view.AutoScrollViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="220dp">
