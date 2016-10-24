@@ -36,6 +36,9 @@ public class AutoViewPager extends ViewPager {
     }
 
     public void start(){
+        //先停止
+        onStop();
+
         if (mTimer == null) {
             mTimer = new Timer();
         }
@@ -108,14 +111,9 @@ public class AutoViewPager extends ViewPager {
     public boolean onTouchEvent(MotionEvent ev) {
         switch (ev.getAction()){
             case MotionEvent.ACTION_DOWN:
-                Log.i(TAG,"down");
                 onStop();
                 break;
-            case MotionEvent.ACTION_MOVE:
-                Log.i(TAG,"move");
-                break;
             case MotionEvent.ACTION_UP:
-                Log.i(TAG,"up");
                 onResume();
                 break;
         }
