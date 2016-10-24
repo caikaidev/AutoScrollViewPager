@@ -54,13 +54,13 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.onDestroy();
     }
 
-    private BaseViewPagerAdapter.OnAutoViewPagerItemClickListener listener = new BaseViewPagerAdapter.OnAutoViewPagerItemClickListener<Picture>() {
+    private BaseViewPagerAdapter.OnAutoViewPagerItemClickListener listener = new BaseViewPagerAdapter.OnAutoViewPagerItemClickListener<String>() {
 
         @Override
-        public void onItemClick(int position, Picture picture) {
+        public void onItemClick(int position, String url) {
             Toast.makeText(getApplicationContext(),
 
-                    picture.getName(), Toast.LENGTH_SHORT).show();
+                    url, Toast.LENGTH_SHORT).show();
         }
     };
 }
