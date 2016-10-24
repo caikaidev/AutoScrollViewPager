@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(int position, String url) {
             Toast.makeText(getApplicationContext(),
-
                     url, Toast.LENGTH_SHORT).show();
         }
     };

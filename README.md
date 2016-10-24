@@ -25,7 +25,7 @@ replace:
 in app's build.gradle,add:
 
 ```
-compile 'com.kcode.github:autoScrollViewPager:0.1.0'
+compile 'com.kcode.github:autoScrollViewPager:0.7.0'
 ```
 
 ##Usage
