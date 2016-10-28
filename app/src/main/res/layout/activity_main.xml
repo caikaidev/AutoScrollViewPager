@@ -11,7 +11,8 @@
     <com.kcode.autoscrollviewpager.view.AutoScrollViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="220dp">
+        android:layout_height="220dp"
+        app:point_layout="center">
 
     </com.kcode.autoscrollviewpager.view.AutoScrollViewPager>
 </RelativeLayout>

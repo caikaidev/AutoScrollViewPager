@@ -137,6 +137,10 @@ compile 'com.kcode.github:autoScrollViewPager:0.7.0'
     public BaseViewPagerAdapter(Context context, List<T> data,OnAutoViewPagerItemClickListener listener)
     
     ```
+
+* PointLayout
+    add ```xmlns:app="http://schemas.android.com/apk/res-auto"``` to layout file. And ,
+     user ```app:point_layout="left|right|center"```.
 sample:[AutoViewPager](https://github.com/fccaikai/AutoScrollViewPager/tree/master/app)
 
 
