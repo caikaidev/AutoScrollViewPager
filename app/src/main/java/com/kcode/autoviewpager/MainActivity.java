@@ -29,12 +29,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mViewPager = (AutoScrollViewPager) findViewById(R.id.viewPager);
-        mViewPager.setAdapter(new BaseViewPagerAdapter<String>(this,initData(),listener) {
+
+        BaseViewPagerAdapter<String> adapter = new BaseViewPagerAdapter<String>(this,listener) {
             @Override
             public void loadImage(ImageView view, int position, String url) {
                 Picasso.with(MainActivity.this).load(url).into(view);
             }
-        });
+        };
+        mViewPager.setAdapter(adapter);
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        adapter.add(initData());
 
 
     }

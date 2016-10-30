@@ -83,12 +83,12 @@ public abstract class BaseViewPagerAdapter<T> extends PagerAdapter implements Vi
         }
 
         data.addAll(list);
-        //设置初始为中间，这样一开始就能够往左滑动了
-        mView.setCurrentItem(0);
+
+        notifyDataSetChanged();
 
         mView.start();
         mView.updatePointView(getRealCount());
-        notifyDataSetChanged();
+
     }
 
     @Override
