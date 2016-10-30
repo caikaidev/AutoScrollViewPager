@@ -88,6 +88,7 @@ public abstract class BaseViewPagerAdapter<T> extends PagerAdapter implements Vi
 
         mView.start();
         mView.updatePointView(getRealCount());
+        notifyDataSetChanged();
     }
 
     @Override
