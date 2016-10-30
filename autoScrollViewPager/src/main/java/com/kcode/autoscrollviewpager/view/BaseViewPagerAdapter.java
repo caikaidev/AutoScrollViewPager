@@ -77,6 +77,19 @@ public abstract class BaseViewPagerAdapter<T> extends PagerAdapter implements Vi
         mView.updatePointView(getRealCount());
     }
 
+    public void add(List<T> list){
+        if (data == null) {
+            data = new ArrayList<>();
+        }
+
+        data.addAll(list);
+        //设置初始为中间，这样一开始就能够往左滑动了
+        mView.setCurrentItem(0);
+
+        mView.start();
+        mView.updatePointView(getRealCount());
+    }
+
     @Override
     public int getCount() {
         return data == null ? 0 : Integer.MAX_VALUE;
