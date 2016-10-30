@@ -92,7 +92,7 @@ public abstract class BaseViewPagerAdapter<T> extends PagerAdapter implements Vi
 
     @Override
     public int getCount() {
-        return data == null ? 0 : Integer.MAX_VALUE;
+        return (data == null || data.size() == 0 ) ? 0 : Integer.MAX_VALUE;
     }
 
     public int getRealCount(){
