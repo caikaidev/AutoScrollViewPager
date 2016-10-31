@@ -3,11 +3,13 @@ package com.kcode.autoscrollviewpager.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.kcode.autoscrollviewpager.R;
 
@@ -17,7 +19,6 @@ import com.kcode.autoscrollviewpager.R;
 
 public class AutoScrollViewPager extends RelativeLayout {
 
-    private final static String LEFT_POINT = "left";
     private final static String RIGHT_POINT = "right";
     private final static String CENTER_POINT = "center";
 
@@ -32,8 +33,18 @@ public class AutoScrollViewPager extends RelativeLayout {
     private Context mContext;
 
     private LinearLayout layout;
+    private View view;//底部文字和小圆点
+    private TextView mSubTitle;//标题文字
 
-    public AutoScrollViewPager(Context context) {
+    public TextView getSubTitle() {
+        return mSubTitle;
+    }
+
+    public AutoViewPager getViewPager() {
+        return mViewPager;
+    }
+
+    private AutoScrollViewPager(Context context) {
         super(context);
         init(context);
     }
@@ -49,16 +60,16 @@ public class AutoScrollViewPager extends RelativeLayout {
 
         String pointLayoutStr = typedArray.getString(R.styleable.AutoScrollViewPager_point_layout);
         switch (pointLayoutStr) {
-            case LEFT_POINT:
-                pointLayout = LEFT_INT;
-                break;
             case RIGHT_POINT:
                 pointLayout = RIGHT_INT;
+                view = LayoutInflater.from(context).inflate(R.layout.point_right_text,null);
                 break;
             case CENTER_POINT:
                 pointLayout = CENTER_INT;
+                view = LayoutInflater.from(context).inflate(R.layout.point_center_text,null);
                 break;
             default:
+                view = LayoutInflater.from(context).inflate(R.layout.point_center_text,null);
                 break;
         }
 
@@ -71,8 +82,17 @@ public class AutoScrollViewPager extends RelativeLayout {
     private void init(Context context) {
         mContext = context;
         mViewPager = new AutoViewPager(context);
-        layout = new LinearLayout(mContext);
         addView(mViewPager);
+
+        if (view != null) {
+            mSubTitle = (TextView) view.findViewById(R.id.subTitle);
+            layout = (LinearLayout) view.findViewById(R.id.pointLayout);
+            LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            params.addRule(ALIGN_PARENT_BOTTOM);
+            view.setLayoutParams(params);
+            addView(view);
+        }
+
     }
 
     public void setAdapter(BaseViewPagerAdapter adapter) {
@@ -81,18 +101,12 @@ public class AutoScrollViewPager extends RelativeLayout {
         }
     }
 
-    public AutoViewPager getViewPager() {
-        return mViewPager;
-    }
-
     public void initPointView(int size) {
 
-        layout = new LinearLayout(mContext);
         for (int i = 0; i < size; i++) {
             ImageView imageView = new ImageView(mContext);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(20, 20);
             params.leftMargin = 8;
-            params.gravity = Gravity.CENTER;
             imageView.setLayoutParams(params);
             if (i == 0) {
                 imageView.setBackgroundResource(R.drawable.point_checked);
@@ -102,28 +116,6 @@ public class AutoScrollViewPager extends RelativeLayout {
 
             layout.addView(imageView);
         }
-
-        LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutParams.addRule(ALIGN_PARENT_BOTTOM);
-        switch (pointLayout) {
-            case RIGHT_INT:
-                layoutParams.addRule(ALIGN_PARENT_RIGHT);
-                break;
-            case LEFT_INT:
-                layoutParams.addRule(ALIGN_PARENT_LEFT);
-                break;
-            case CENTER_INT:
-                layoutParams.addRule(CENTER_HORIZONTAL);
-                break;
-            default:
-                layoutParams.addRule(ALIGN_PARENT_RIGHT);
-                break;
-        }
-
-
-        layoutParams.setMargins(12, 20, 12, 20);
-        layout.setLayoutParams(layoutParams);
-        addView(layout);
     }
 
 

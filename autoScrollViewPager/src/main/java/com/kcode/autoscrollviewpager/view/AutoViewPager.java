@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.widget.TextView;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -118,5 +119,14 @@ public class AutoViewPager extends ViewPager {
                 break;
         }
         return super.onTouchEvent(ev);
+    }
+
+    public TextView getSubTitle() {
+        if (getParent() instanceof AutoScrollViewPager){
+            AutoScrollViewPager pager = (AutoScrollViewPager) getParent();
+            return pager.getSubTitle();
+        }
+
+        return null;
     }
 }

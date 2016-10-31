@@ -140,7 +140,7 @@ compile 'com.kcode.github:autoScrollViewPager:0.9.3'
 
 * PointLayout
     add ```xmlns:app="http://schemas.android.com/apk/res-auto"``` to layout file. And ,
-     user ```app:point_layout="left|right|center"```.
+     user ```app:point_layout="right|center"```.
 sample:[AutoViewPager](https://github.com/fccaikai/AutoScrollViewPager/tree/master/app)
 
 

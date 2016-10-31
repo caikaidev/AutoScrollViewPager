@@ -3,6 +3,7 @@ package com.kcode.autoviewpager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kcode.autoscrollviewpager.view.AutoScrollViewPager;
@@ -34,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void loadImage(ImageView view, int position, String url) {
                 Picasso.with(MainActivity.this).load(url).into(view);
+            }
+
+            @Override
+            public void setSubTitle(TextView textView, int position, String s) {
+                textView.setText(s);
             }
         };
         mViewPager.setAdapter(adapter);

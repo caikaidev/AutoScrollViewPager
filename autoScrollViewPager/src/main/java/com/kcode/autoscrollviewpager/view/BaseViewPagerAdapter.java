@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.kcode.autoscrollviewpager.R;
 
@@ -91,6 +92,21 @@ public abstract class BaseViewPagerAdapter<T> extends PagerAdapter implements Vi
 
     }
 
+    public void init(List<T> list){
+        if (data == null) {
+            data = new ArrayList<>();
+        }
+
+        data.clear();
+        data.addAll(list);
+
+        notifyDataSetChanged();
+
+        mView.start();
+        mView.updatePointView(getRealCount());
+
+    }
+
     @Override
     public int getCount() {
         return (data == null || data.size() == 0 ) ? 0 : Integer.MAX_VALUE;
@@ -121,10 +137,18 @@ public abstract class BaseViewPagerAdapter<T> extends PagerAdapter implements Vi
         loadImage(view,position, data.get(position % getRealCount()));
         container.addView(view);
 
+        //设置标题
+        if (mView.getSubTitle() != null){
+            setSubTitle(mView.getSubTitle(),position,data.get(position % getRealCount()));
+        }else {
+
+        }
+
         return view;
     }
 
     public abstract void loadImage(ImageView view,int position,T t);
+    public abstract void setSubTitle(TextView textView,int position,T t);
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
