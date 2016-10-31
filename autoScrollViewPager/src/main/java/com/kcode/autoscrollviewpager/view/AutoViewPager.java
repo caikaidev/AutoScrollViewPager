@@ -23,6 +23,11 @@ public class AutoViewPager extends ViewPager {
 
     private Timer mTimer;
     private AutoTask mTask;
+    private boolean isStart;
+
+    public boolean isStart() {
+        return isStart;
+    }
 
     public AutoViewPager(Context context) {
         super(context);
@@ -37,9 +42,14 @@ public class AutoViewPager extends ViewPager {
     }
 
     public void start(){
+
+        if (((BaseViewPagerAdapter)getAdapter()).getRealCount() == 0) {
+            return;
+        }
         //先停止
         onStop();
 
+        isStart = true;
         if (mTimer == null) {
             mTimer = new Timer();
         }
@@ -98,6 +108,8 @@ public class AutoViewPager extends ViewPager {
             mTimer.cancel();
             mTimer = null;
         }
+
+        isStart = false;
     }
 
     public void onDestroy(){

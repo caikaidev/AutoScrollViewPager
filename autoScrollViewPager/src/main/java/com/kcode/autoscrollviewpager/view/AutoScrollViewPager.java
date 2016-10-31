@@ -103,6 +103,7 @@ public class AutoScrollViewPager extends RelativeLayout {
 
     public void initPointView(int size) {
 
+        layout.removeAllViews();
         for (int i = 0; i < size; i++) {
             ImageView imageView = new ImageView(mContext);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(20, 20);
@@ -135,6 +136,18 @@ public class AutoScrollViewPager extends RelativeLayout {
     public void onDestroy() {
         if (mViewPager != null) {
             mViewPager.onDestroy();
+        }
+    }
+
+    public void onResume(){
+        if (mViewPager != null && !mViewPager.isStart()) {
+            mViewPager.start();
+        }
+    }
+
+    public void onPause(){
+        if (mViewPager != null) {
+            mViewPager.onStop();
         }
     }
 

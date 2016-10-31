@@ -64,8 +64,11 @@ public abstract class BaseViewPagerAdapter<T> extends PagerAdapter implements Vi
         int position = Integer.MAX_VALUE/2 - (Integer.MAX_VALUE/2) % getRealCount();
         mView.setCurrentItem(position);
 
-        mView.start();
-        mView.updatePointView(getRealCount());
+        if (!mView.isStart()) {
+            mView.start();
+            mView.updatePointView(getRealCount());
+        }
+
     }
 
     public void setListener(OnAutoViewPagerItemClickListener listener) {
@@ -102,8 +105,11 @@ public abstract class BaseViewPagerAdapter<T> extends PagerAdapter implements Vi
 
         notifyDataSetChanged();
 
-        mView.start();
-        mView.updatePointView(getRealCount());
+        if (!mView.isStart()) {
+            mView.start();
+            mView.updatePointView(getRealCount());
+        }
+
 
     }
 
@@ -125,6 +131,19 @@ public abstract class BaseViewPagerAdapter<T> extends PagerAdapter implements Vi
     public Object instantiateItem(ViewGroup container, final int position) {
         ImageView view = (ImageView) LayoutInflater.from(mContext)
                 .inflate(R.layout.imageview,container,false);
+        loadImage(view,position, data.get(position % getRealCount()));
+        container.addView(view);
+
+        //设置标题(不知道为什么标题跟图片对不上，所以做了如下处理，有大神看到帮忙看看。。。)
+        if (mView.getSubTitle() != null){
+            if (position == 0){
+                setSubTitle(mView.getSubTitle(),position,data.get((getRealCount() - 1)));
+            }else {
+                setSubTitle(mView.getSubTitle(),position,data.get((position - 1) % getRealCount()));
+            }
+
+        }
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,16 +152,6 @@ public abstract class BaseViewPagerAdapter<T> extends PagerAdapter implements Vi
                 }
             }
         });
-
-        loadImage(view,position, data.get(position % getRealCount()));
-        container.addView(view);
-
-        //设置标题
-        if (mView.getSubTitle() != null){
-            setSubTitle(mView.getSubTitle(),position,data.get(position % getRealCount()));
-        }else {
-
-        }
 
         return view;
     }
