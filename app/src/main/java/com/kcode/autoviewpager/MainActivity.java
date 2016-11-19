@@ -44,11 +44,6 @@ public class MainActivity extends AppCompatActivity {
         };
         mViewPager.setAdapter(adapter);
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         adapter.add(initData());
 
 

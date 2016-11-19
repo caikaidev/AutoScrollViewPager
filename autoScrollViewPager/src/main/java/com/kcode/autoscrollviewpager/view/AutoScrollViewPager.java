@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.kcode.autoscrollviewpager.R;
 
+import static com.kcode.autoscrollviewpager.R.id.pointLayout;
+
 /**
  * Created by caik on 2016/10/17.
  */
@@ -24,9 +26,6 @@ public class AutoScrollViewPager extends RelativeLayout {
 
     private final static int RIGHT_INT = 0;
     private final static int CENTER_INT = 1;
-    private final static int LEFT_INT = 2;
-
-    private int pointLayout;
 
     private AutoViewPager mViewPager;
 
@@ -45,8 +44,7 @@ public class AutoScrollViewPager extends RelativeLayout {
     }
 
     private AutoScrollViewPager(Context context) {
-        super(context);
-        init(context);
+        this(context,null);
     }
 
     public AutoScrollViewPager(Context context, AttributeSet attrs) {
@@ -61,11 +59,9 @@ public class AutoScrollViewPager extends RelativeLayout {
         String pointLayoutStr = typedArray.getString(R.styleable.AutoScrollViewPager_point_layout);
         switch (pointLayoutStr) {
             case RIGHT_POINT:
-                pointLayout = RIGHT_INT;
                 view = LayoutInflater.from(context).inflate(R.layout.point_right_text,null);
                 break;
             case CENTER_POINT:
-                pointLayout = CENTER_INT;
                 view = LayoutInflater.from(context).inflate(R.layout.point_center_text,null);
                 break;
             default:
@@ -86,7 +82,7 @@ public class AutoScrollViewPager extends RelativeLayout {
 
         if (view != null) {
             mSubTitle = (TextView) view.findViewById(R.id.subTitle);
-            layout = (LinearLayout) view.findViewById(R.id.pointLayout);
+            layout = (LinearLayout) view.findViewById(pointLayout);
             LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             params.addRule(ALIGN_PARENT_BOTTOM);
             view.setLayoutParams(params);
