@@ -1,7 +1,6 @@
 package com.kcode.autoscrollviewpager.view;
 
 import android.content.Context;
-import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -18,19 +17,19 @@ import java.util.TimerTask;
 public class AutoViewPager extends ViewPager {
 
     private static final String TAG = "AutoViewPager";
-
-    private int currentItem;
+    private static final int TIME = 3000;
 
     private Timer mTimer;
     private AutoTask mTask;
     private boolean isStart;
+    private int currentItem;
 
     public boolean isStart() {
         return isStart;
     }
 
     public AutoViewPager(Context context) {
-        super(context);
+        this(context,null);
     }
 
     public AutoViewPager(Context context, AttributeSet attrs) {
@@ -48,27 +47,34 @@ public class AutoViewPager extends ViewPager {
         }
         //先停止
         onStop();
+        doStart();
 
+    }
+
+    private void doStart() {
         isStart = true;
         if (mTimer == null) {
             mTimer = new Timer();
         }
-        mTimer.schedule(new AutoTask(),3000,3000);
-
+        mTimer.schedule(new AutoTask(),TIME,TIME);
     }
 
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            currentItem = getCurrentItem();
-            if(currentItem == getAdapter().getCount() - 1){
-                currentItem = 0 ;
-            }else {
-                currentItem++ ;
-            }
-            setCurrentItem(currentItem);
+            changePageView();
         }
     };
+
+    private void changePageView() {
+        currentItem = getCurrentItem();
+        if(currentItem == getAdapter().getCount() - 1){
+            currentItem = 0 ;
+        }else {
+            currentItem++ ;
+        }
+        setCurrentItem(currentItem);
+    }
 
     private AutoHandler mHandler = new AutoHandler();
 
@@ -82,34 +88,23 @@ public class AutoViewPager extends ViewPager {
     }
 
     public void onPageSelected(int position) {
-        AutoScrollViewPager pager = (AutoScrollViewPager) getParent();
-        pager.updatePointView(position);
-    }
-
-    private class AutoTask extends TimerTask{
-
-        @Override
-        public void run() {
-            mHandler.post(runnable);
+        if (getParent() == null) {
+            return;
         }
-    }
 
-    private final static class AutoHandler extends android.os.Handler{
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-
+        if (getParent() instanceof AutoScrollViewPager) {
+            AutoScrollViewPager pager = (AutoScrollViewPager) getParent();
+            pager.updatePointView(position);
         }
     }
 
     public void onStop(){
+        isStart = false;
         //先取消定时器
         if (mTimer != null) {
             mTimer.cancel();
             mTimer = null;
         }
-
-        isStart = false;
     }
 
     public void onDestroy(){
@@ -141,4 +136,14 @@ public class AutoViewPager extends ViewPager {
 
         return null;
     }
+
+    private class AutoTask extends TimerTask{
+        @Override
+        public void run() {
+            mHandler.post(runnable);
+        }
+    }
+
+    private final static class AutoHandler extends android.os.Handler{}
+
 }

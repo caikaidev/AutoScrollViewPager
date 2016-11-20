@@ -44,21 +44,7 @@ compile 'com.kcode.github:autoScrollViewPager:1.0.1'
 * in activity:
     
     ```
-        package com.kcode.autoviewpager;
-        
-        import android.os.Bundle;
-        import android.support.v7.app.AppCompatActivity;
-        import android.widget.ImageView;
-        import android.widget.Toast;
-        
-        import com.kcode.autoscrollviewpager.view.AutoScrollViewPager;
-        import com.kcode.autoscrollviewpager.view.BaseViewPagerAdapter;
-        import com.kcode.autoviewpager.bean.Picture;
-        import com.squareup.picasso.Picasso;
-        
-        import java.util.ArrayList;
-        import java.util.List;
-        
+            
         public class MainActivity extends AppCompatActivity {
         
             private AutoScrollViewPager mViewPager;
@@ -75,12 +61,23 @@ compile 'com.kcode.github:autoScrollViewPager:1.0.1'
                 setContentView(R.layout.activity_main);
         
                 mViewPager = (AutoScrollViewPager) findViewById(R.id.viewPager);
-                mViewPager.setAdapter(new BaseViewPagerAdapter<String>(this,initData(),listener) {
+        
+                BaseViewPagerAdapter<String> adapter = new BaseViewPagerAdapter<String>(this,listener) {
                     @Override
                     public void loadImage(ImageView view, int position, String url) {
                         Picasso.with(MainActivity.this).load(url).into(view);
                     }
-                });
+        
+                    @Override
+                    public void setSubTitle(TextView textView, int position, String s) {
+                        textView.setText(s);
+                    }
+                };
+                mViewPager.setAdapter(adapter);
+        
+                adapter.add(initData());
+        
+        
             }
         
             private List<String> initData() {
@@ -98,22 +95,20 @@ compile 'com.kcode.github:autoScrollViewPager:1.0.1'
                 mViewPager.onDestroy();
             }
         
-            private BaseViewPagerAdapter.OnAutoViewPagerItemClickListener listener = new BaseViewPagerAdapter.OnAutoViewPagerItemClickListener<Picture>() {
+            private BaseViewPagerAdapter.OnAutoViewPagerItemClickListener listener = new BaseViewPagerAdapter.OnAutoViewPagerItemClickListener<String>() {
         
                 @Override
-                public void onItemClick(int position, Picture picture) {
+                public void onItemClick(int position, String url) {
                     Toast.makeText(getApplicationContext(),
-        
-                            picture.getName(), Toast.LENGTH_SHORT).show();
+                            url, Toast.LENGTH_SHORT).show();
                 }
             };
-        }
-    
-    
+        }   
     ```
 
-
     Override```public void loadImage(ImageView view, int position, String url)``` to load image to ImageView.
+    
+    Override```public void setSubTitle(TextView textView, int position, String s)``` to set text to subTitle.
 
 
 * OnClick
@@ -141,6 +136,7 @@ compile 'com.kcode.github:autoScrollViewPager:1.0.1'
 * PointLayout
     add ```xmlns:app="http://schemas.android.com/apk/res-auto"``` to layout file. And ,
      user ```app:point_layout="right|center"```.
+     
 sample:[AutoViewPager](https://github.com/fccaikai/AutoScrollViewPager/tree/master/app)
 
 

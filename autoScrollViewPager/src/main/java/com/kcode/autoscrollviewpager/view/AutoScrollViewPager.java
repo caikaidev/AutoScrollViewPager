@@ -43,7 +43,7 @@ public class AutoScrollViewPager extends RelativeLayout {
         return mViewPager;
     }
 
-    private AutoScrollViewPager(Context context) {
+    public AutoScrollViewPager(Context context) {
         this(context,null);
     }
 
@@ -55,7 +55,6 @@ public class AutoScrollViewPager extends RelativeLayout {
         super(context, attrs, defStyleAttr);
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.AutoScrollViewPager, defStyleAttr, 0);
-
         String pointLayoutStr = typedArray.getString(R.styleable.AutoScrollViewPager_point_layout);
         switch (pointLayoutStr) {
             case RIGHT_POINT:
