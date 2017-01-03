@@ -124,7 +124,9 @@ public abstract class BaseViewPagerAdapter<T> extends PagerAdapter implements Vi
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((ImageView) object);
+        ImageView view = (ImageView) object;
+        container.removeView(view);
+        view = null;
     }
 
     @Override
