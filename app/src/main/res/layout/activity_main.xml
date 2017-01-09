@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.kcode.autoviewpager.MainActivity">
 
     <!--app:point_layout="center" 指定小圆点位置（center或者right）-->
@@ -16,4 +17,10 @@
         app:point_layout="center">
 
     </com.kcode.autoscrollviewpager.view.AutoScrollViewPager>
-</RelativeLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="add"
+        android:text="添加图片"/>
+</LinearLayout>

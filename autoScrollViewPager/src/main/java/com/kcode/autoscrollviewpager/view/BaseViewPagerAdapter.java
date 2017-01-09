@@ -3,6 +3,7 @@ package com.kcode.autoscrollviewpager.view;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ import java.util.List;
  */
 
 public abstract class BaseViewPagerAdapter<T> extends PagerAdapter implements ViewPager.OnPageChangeListener{
+
+    private static final String TAG = "BaseViewPagerAdapter";
 
     private List<T> data = new ArrayList<>();
 
@@ -76,9 +79,24 @@ public abstract class BaseViewPagerAdapter<T> extends PagerAdapter implements Vi
     }
 
     public void add(T t){
+
+        if (mView.getAdapter() == null) {
+            throw new RuntimeException("必须先设置Adapter");
+        }
+
+        if (data == null) {
+            data = new ArrayList<>();
+        }
+        int currentItem = mView.getCurrentItem() % getRealCount();
         data.add(t);
-        notifyDataSetChanged();
-        mView.updatePointView(getRealCount());
+        //先停止自动滚动
+        mView.onStop();
+        Log.d(TAG, "当前显示第" + currentItem + "/" + mView.getCurrentItem());
+//        notifyDataSetChanged();
+        mView.updatePointView(getRealCount(),currentItem);
+        //重新开始自动滚动
+        mView.onResume();
+
     }
 
     public void add(List<T> list){
@@ -149,9 +167,12 @@ public abstract class BaseViewPagerAdapter<T> extends PagerAdapter implements Vi
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                mView.onStop();
                 if (listener != null) {
                     listener.onItemClick(position % getRealCount(),data.get(position % getRealCount()));
                 }
+                mView.onResume();
             }
         });
 
@@ -173,7 +194,7 @@ public abstract class BaseViewPagerAdapter<T> extends PagerAdapter implements Vi
 
     @Override
     public void onPageSelected(int position) {
-        mView.onPageSelected(position % getRealCount());
+//        mView.onPageSelected(position % getRealCount());
     }
 
     @Override

@@ -97,6 +97,10 @@ public class AutoScrollViewPager extends RelativeLayout {
     }
 
     public void initPointView(int size) {
+        initPointView(size,0);
+    }
+
+    public void initPointView(int size,int currentPoint) {
 
         layout.removeAllViews();
         for (int i = 0; i < size; i++) {
@@ -104,7 +108,7 @@ public class AutoScrollViewPager extends RelativeLayout {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(20, 20);
             params.leftMargin = 8;
             imageView.setLayoutParams(params);
-            if (i == 0) {
+            if (i == currentPoint) {
                 imageView.setBackgroundResource(R.drawable.point_checked);
             } else {
                 imageView.setBackgroundResource(R.drawable.point_normal);

@@ -74,14 +74,21 @@ public class AutoViewPager extends ViewPager {
             currentItem++ ;
         }
         setCurrentItem(currentItem);
+        //更新小圆点状态
+        int nextItem = (currentItem % ((BaseViewPagerAdapter)getAdapter()).getRealCount());
+        onPageSelected(nextItem);
     }
 
     private AutoHandler mHandler = new AutoHandler();
 
     public void updatePointView(int size) {
+        updatePointView(size,0);
+    }
+
+    public void updatePointView(int size,int currentItem) {
         if (getParent() instanceof AutoScrollViewPager){
             AutoScrollViewPager pager = (AutoScrollViewPager) getParent();
-            pager.initPointView(size);
+            pager.initPointView(size,currentItem);
         }else {
             Log.e(TAG,"parent view not be AutoScrollViewPager");
         }
@@ -118,14 +125,22 @@ public class AutoViewPager extends ViewPager {
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         switch (ev.getAction()){
-            case MotionEvent.ACTION_DOWN:
-                onStop();
-                break;
             case MotionEvent.ACTION_UP:
                 onResume();
                 break;
         }
         return super.onTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        switch (ev.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                //onTouchEvent中无法拦截到ACTION_DOWN的动作
+                onStop();
+                break;
+        }
+        return super.onInterceptTouchEvent(ev);
     }
 
     public TextView getSubTitle() {
