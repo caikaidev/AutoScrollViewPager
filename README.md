@@ -1,7 +1,7 @@
-##AutoViewPager
+## AutoViewPager
 ![轮播图.gif](http://upload-images.jianshu.io/upload_images/1715403-cbf7c309b85e2770.gif?imageMogr2/auto-orient/strip)
 
-##Download
+## Download
 
 Gradle:
 
@@ -25,10 +25,10 @@ replace:
 in app's build.gradle,add:
 
 ```
-compile 'com.kcode.github:autoScrollViewPager:1.0.1'
+compile 'com.github.fccaikai:AutoScrollViewPager:1.0.1'
 ```
 
-##Usage
+## Usage
 * in layout
 
     ```
@@ -42,7 +42,7 @@ compile 'com.kcode.github:autoScrollViewPager:1.0.1'
 
 
 * in activity:
-    
+
     ```
             
         public class MainActivity extends AppCompatActivity {
@@ -107,20 +107,20 @@ compile 'com.kcode.github:autoScrollViewPager:1.0.1'
     ```
 
     Override```public void loadImage(ImageView view, int position, String url)``` to load image to ImageView.
-    
+
     Override```public void setSubTitle(TextView textView, int position, String s)``` to set text to subTitle.
 
 
 * OnClick
 
-    
+
     ```
     private BaseViewPagerAdapter.OnAutoViewPagerItemClickListener listener = new BaseViewPagerAdapter.OnAutoViewPagerItemClickListener<String>() {
-    
+
             @Override
             public void onItemClick(int position, String url) {
                 Toast.makeText(getApplicationContext(),
-    
+
                         url, Toast.LENGTH_SHORT).show();
             }
         };
@@ -130,13 +130,13 @@ compile 'com.kcode.github:autoScrollViewPager:1.0.1'
 
     ```
     public BaseViewPagerAdapter(Context context, List<T> data,OnAutoViewPagerItemClickListener listener)
-    
+
     ```
 
 * PointLayout
     add ```xmlns:app="http://schemas.android.com/apk/res-auto"``` to layout file. And ,
      user ```app:point_layout="right|center"```.
-     
+
 sample:[AutoViewPager](https://github.com/fccaikai/AutoScrollViewPager/tree/master/app)
 
 
